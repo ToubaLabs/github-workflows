@@ -6,6 +6,10 @@ name: Cloudflare deploy
 
 'on':
   workflow_call:
+    inputs:
+      worker_name:
+        required: true
+        type: string
     secrets:
       CLOUDFLARE_API_TOKEN:
         required: true
@@ -36,4 +40,5 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_WORKER_NAME: ${{ inputs.worker_name }}
         run: npm run deploy:vinext
